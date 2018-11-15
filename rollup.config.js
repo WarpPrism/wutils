@@ -10,9 +10,9 @@ const joinPath = (dir) => {
 export default {
   input: 'src/main.js',
   output: {
-    file: 'dist/wutil.js',
+    file: 'dist/wutils.js',
     format: 'umd',
-    name: 'wutil'
+    name: 'wutils'
   },
   plugins: [
     resolve(),

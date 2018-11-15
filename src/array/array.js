@@ -2,12 +2,23 @@ import { chalkPrint } from '../print/print.js'
 import { randomInt } from '../random/random.js'
 
 /**
+ * 数组判断
+ */
+export const isArray = (arr = []) => {
+  if (Array.isArray) {
+    return Array.isArray(arr)
+  } else {
+    return Object.prototype.toString.call(arr) === '[object Array]'
+  }
+}
+
+/**
  * @description 数组快速排序
  * @param {Array} arr
  * @param {String} key 按对象的属性进行排序
  */
 export const quickSortArr = (arr = [], key = '') => {
-  if (!Array.isArray(arr)) {
+  if (!isArray(arr)) {
     chalkPrint('[quickSortArr] argument is not Array.', 'red');
     return [];
   } else if (arr.length <= 1) {
@@ -41,7 +52,7 @@ export const quickSortArr = (arr = [], key = '') => {
  * @param {*} arr
  */
 export const uniqueArr = (arr = []) => {
-  if (!Array.isArray(arr)) {
+  if (!isArray(arr)) {
     chalkPrint('[uniqueArr] argument is not Array.', 'red');
     return [];
   } else if (arr.length <= 1) {
@@ -73,7 +84,7 @@ export const uniqueArr = (arr = []) => {
  * @return {Array}
  */
 export const shuffleArr = (arr) => {
-  if (!Array.isArray(arr)) {
+  if (!isArray(arr)) {
     chalkPrint('[shuffleArr] argument is not Array.', 'red');
     return [];
   }
@@ -86,3 +97,35 @@ export const shuffleArr = (arr) => {
   }
   return _arr
 };
+
+/**
+ * 数组二分搜索算法
+ * @param {Array} arr 要搜索的数组
+ * @param {Any} target 目标值
+ * @return {Number} 数组下标
+ */
+export const binarySearchArr = (arr, target) => {
+  if (!isArray(arr)) {
+    return -1;
+  }
+  // arr前提要是从小到大排列的数组
+  arr = quickSortArr(arr);
+  let bottom = 0;
+  let top = arr.length - 1;
+  let position;
+
+  while (bottom < top) {
+    let middle = Math.floor((bottom + top) / 2);
+    if (arr[middle] === target) {
+      position = middle;
+      // console.log("Find target at position: " + position);
+      return position;
+    } else if (arr[middle] < target) {
+      bottom = middle + 1;
+    } else if (arr[middle] > target) {
+      top = middle;
+    }
+  }
+
+  return position;
+}

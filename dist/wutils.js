@@ -1,12 +1,20 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global.wutil = factory());
+  (global.wutils = factory());
 }(this, (function () { 'use strict';
 
+  /**
+   * 彩色控制台打印
+   * @param {*} str
+   * @param {*} colorStyle
+   */
   var chalkPrint = function chalkPrint(str) {
     var colorStyle = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'green';
-    console.log('%c' + str, "font-weight: bold; color: ".concat(colorStyle));
+
+    if (str && typeof str === 'string') {
+      console.log('%c' + str, "font-weight: bold; color: ".concat(colorStyle));
+    }
   };
 
   var printModule = /*#__PURE__*/Object.freeze({
@@ -31,6 +39,14 @@
   };
 
   /**
+   * 数组判断
+   */
+
+  var isArray = function isArray() {
+    var arr = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+    return Array.isArray(arr);
+  };
+  /**
    * @description 数组快速排序
    * @param {Array} arr
    * @param {String} key 按对象的属性进行排序
@@ -40,7 +56,7 @@
     var arr = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
     var key = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
 
-    if (!Array.isArray(arr)) {
+    if (!isArray(arr)) {
       chalkPrint('[quickSortArr] argument is not Array.', 'red');
       return [];
     } else if (arr.length <= 1) {
@@ -78,7 +94,7 @@
   var uniqueArr = function uniqueArr() {
     var arr = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
 
-    if (!Array.isArray(arr)) {
+    if (!isArray(arr)) {
       chalkPrint('[uniqueArr] argument is not Array.', 'red');
       return [];
     } else if (arr.length <= 1) {
@@ -113,7 +129,7 @@
    */
 
   var shuffleArr = function shuffleArr(arr) {
-    if (!Array.isArray(arr)) {
+    if (!isArray(arr)) {
       chalkPrint('[shuffleArr] argument is not Array.', 'red');
       return [];
     }
@@ -129,15 +145,51 @@
 
     return _arr;
   };
+  /**
+   * 数组二分搜索算法
+   * @param {Array} arr 要搜索的数组
+   * @param {Any} target 目标值
+   * @return {Number} 数组下标
+   */
+
+  var binarySearchArr = function binarySearchArr(arr, target) {
+    if (!isArray(arr)) {
+      return;
+    } // arr前提要是从小到大排列的数组
+
+
+    arr = quickSort(arr);
+    var bottom = 0;
+    var top = arr.length - 1;
+    var position;
+
+    while (bottom < top) {
+      var middle = Math.floor((bottom + top) / 2);
+
+      if (arr[middle] == target) {
+        position = middle;
+        console.log("Find target at position: " + position);
+        return position;
+      } else if (arr[middle] < target) {
+        bottom = middle + 1;
+      } else if (arr[middle] > target) {
+        top = middle;
+      }
+    }
+
+    return position;
+  };
 
   var arrayModule = /*#__PURE__*/Object.freeze({
+    isArray: isArray,
     quickSortArr: quickSortArr,
     uniqueArr: uniqueArr,
-    shuffleArr: shuffleArr
+    shuffleArr: shuffleArr,
+    binarySearchArr: binarySearchArr
   });
 
-  var wutil = Object.assign({}, arrayModule, printModule);
+  var wutils = Object.assign({}, arrayModule, printModule);
 
-  return wutil;
+  return wutils;
 
 })));

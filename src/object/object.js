@@ -1,9 +1,27 @@
 /**
+ * 判断是否是纯对象
+ * @param {*} value
+ */
+export const isPlainObject = (value) => {
+  if (typeof value != 'object' || Object.prototype.toString.call(obj) != '[object Object]') {
+    return false
+  }
+  if (Object.getPrototypeOf(value) === null) {
+    return true
+  }
+  let proto = value
+  while (Object.getPrototypeOf(proto) !== null) {
+    proto = Object.getPrototypeOf(proto)
+  }
+  return Object.getPrototypeOf(value) === proto
+}
+
+/**
  * 判断是否是空对象
  * @param {*} obj
  */
 export const isEmptyObj = (obj = {}) => {
-  if (Object.prototype.toString.call(obj) != '[object Object') {
+  if (!isPlainObject(obj)) {
     return false;
   }
   for (let prop in obj) {

@@ -14,6 +14,9 @@ export const getOS = () => {
   if (/linux/i.test(appVersion)) return 'linux'
 }
 
+/**
+ * 获取浏览器类型
+ */
 export const getBrowser = () => {
   let sys = {};
   let ua = navigator.userAgent.toLowerCase(),;
@@ -33,4 +36,16 @@ export const getBrowser = () => {
   if (sys.opera) return ('Opera: ' + sys.opera)
   if (sys.safari) return ('Safari: ' + sys.safari)
   return 'Unkonwn'
+}
+
+/**
+ * 判断是否是微信环境
+ */
+export const isWeixin = () => {
+  const ua = navigator.userAgent.toLowerCase()
+  if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+    return true;
+  } else {
+    return false;
+  }
 }
