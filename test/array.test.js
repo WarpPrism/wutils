@@ -1,6 +1,12 @@
 'use strict'
 
-import { quickSortArr, uniqueArr, shuffleArr } from '../src/array/array.js';
+import { isArray, quickSortArr, uniqueArr, shuffleArr } from '../src/array/array.js';
+
+test('isArray', () => {
+  expect(isArray([0, 1])).toBeTruthy()
+  expect(isArray('hello')).toBeFalsy()
+  expect(isArray(100)).toBeFalsy()
+})
 
 test('quicksort ascend', () => {
   let testArr = [7, 20, 0, 88, 32, 72, 119]

@@ -3,7 +3,7 @@
  * @param {*} value
  */
 export const isPlainObject = (value) => {
-  if (typeof value != 'object' || Object.prototype.toString.call(obj) != '[object Object]') {
+  if (typeof value != 'object' || Object.prototype.toString.call(value) != '[object Object]') {
     return false
   }
   if (Object.getPrototypeOf(value) === null) {
