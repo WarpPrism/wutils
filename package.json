@@ -1,0 +1,35 @@
+{
+  "name": "wutils",
+  "version": "0.1.0",
+  "description": "前端通用工具库，wutils即wps-utils，weapon-utils，实现前端常用函数的封装。注释、单元测试、文档齐全。",
+  "main": "main.js",
+  "scripts": {
+    "build": "rollup -c",
+    "test": "npm run test:unit",
+    "test:unit": "jest --config test/jest.conf.js"
+  },
+  "author": "zhoujihao@wps.cn",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.1.5",
+    "@babel/preset-env": "^7.1.5",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "chalk": "^2.4.1",
+    "jest": "^23.6.0",
+    "regenerator-runtime": "^0.12.1",
+    "rollup": "^0.67.1",
+    "rollup-plugin-alias": "^1.4.0",
+    "rollup-plugin-babel": "^4.0.3",
+    "rollup-plugin-node-resolve": "^3.4.0"
+  },
+  "engines": {
+    "node": ">= 6.0.0",
+    "npm": ">= 3.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}
