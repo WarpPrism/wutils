@@ -1,5 +1,3 @@
-'use strict'
-
 import { isArray, quickSortArr, uniqueArr, shuffleArr } from '../src/array/array.js';
 
 test('isArray', () => {

@@ -19,7 +19,7 @@ export const getOS = () => {
  */
 export const getBrowser = () => {
   let sys = {};
-  let ua = navigator.userAgent.toLowerCase(),;
+  let ua = navigator.userAgent.toLowerCase();
   let s;
   (s = ua.match(/rv:([\d.]+)\) like gecko/)) ? sys.ie = s[1]:
   (s = ua.match(/msie ([\d\.]+)/)) ? sys.ie = s[1] :

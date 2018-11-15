@@ -52,13 +52,14 @@ export const extend = () => {
 	}
 
 	// Handle case when target is a string or something (possible in deep copy)
-	if ( typeof target !== "object" && !isFunction( target ) ) {
+	if ( typeof target !== "object" && typeof target !== 'function' ) {
 		target = {};
 	}
 
 	// Extend jQuery itself if only one argument is passed
+	// No jQuery, let this = {}
 	if ( i === length ) {
-		target = this;
+		target = {};
 		i--;
 	}
 
@@ -78,7 +79,7 @@ export const extend = () => {
 				}
 
 				// Recurse if we're merging plain objects or arrays
-				if ( deep && copy && ( jQuery.isPlainObject( copy ) ||
+				if ( deep && copy && ( isPlainObject( copy ) ||
 					( copyIsArray = Array.isArray( copy ) ) ) ) {
 
 					if ( copyIsArray ) {
@@ -86,11 +87,11 @@ export const extend = () => {
 						clone = src && Array.isArray( src ) ? src : [];
 
 					} else {
-						clone = src && jQuery.isPlainObject( src ) ? src : {};
+						clone = src && isPlainObject( src ) ? src : {};
 					}
 
 					// Never move original objects, clone them
-					target[ name ] = jQuery.extend( deep, clone, copy );
+					target[ name ] = extend( deep, clone, copy );
 
 				// Don't bring in undefined values
 				} else if ( copy !== undefined ) {

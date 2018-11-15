@@ -1,5 +1,3 @@
-'use strict'
-
 import { isPlainObject, isEmptyObj, extend, stringfyQueryString } from '../src/object/object.js';
 
 let o = new Object()
@@ -28,14 +26,14 @@ test('isEmptyObj', () => {
 
 // test('extend', () => {
 //   // we are venome~
-//   let Eddie  = {
+//   var Eddie  = {
 //     name: 'Eddie Brock',
 //     age: '36',
 //     feature: {
 //       talent: 'elevator'
 //     }
 //   }
-//   let Venome = {
+//   var Venome = {
 //     name: 'venome',
 //     age: 'unknown',
 //     feature: {
@@ -46,8 +44,8 @@ test('isEmptyObj', () => {
 //   Eddie = JSON.parse(JSON.stringify(Eddie))
 //   Venome = JSON.parse(JSON.stringify(Venome))
 
-//   let duye1 = extend({}, Eddie, Venome)
-//   let duye2 = extend(true, {}, Eddie, Venome)
+//   var duye1 = extend(Eddie, Venome)
+//   var duye2 = extend(true, {}, Eddie, Venome)
 //   console.log(duye1);
 //   expect(1).toBe(1)
 // })

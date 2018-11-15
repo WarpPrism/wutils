@@ -7,7 +7,7 @@ module.exports = {
   moduleNameMapper: {
 		'^@/(.*)$': '<rootDir>/src/$1'
   },
-  testURL: 'http://localhost',
+  testURL: 'http://localhost:3000/',
   transform: {
 		'^.+\\.js$': '<rootDir>/node_modules/babel-jest'
 		// '.*\\.(vue)$': '<rootDir>/node_modules/vue-jest'

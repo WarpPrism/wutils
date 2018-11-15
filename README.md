@@ -66,3 +66,5 @@ npm run test
 
 - replaceXSS
 - parseQueryString
+
+> 持续更新中
