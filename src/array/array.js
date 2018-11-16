@@ -83,7 +83,7 @@ export const uniqueArr = (arr = []) => {
  * @param {Array} arr
  * @return {Array}
  */
-export const shuffleArr = (arr) => {
+export const shuffleArr = (arr = []) => {
   if (!isArray(arr)) {
     chalkPrint('[shuffleArr] argument is not Array.', 'red');
     return [];
@@ -99,13 +99,14 @@ export const shuffleArr = (arr) => {
 };
 
 /**
- * 数组二分搜索算法
+ * 数组二分搜索算法，二分搜索适合在大量数据中搜索。如果数组长度小，直接用arr.indexOf()即可
  * @param {Array} arr 要搜索的数组
  * @param {Any} target 目标值
  * @return {Number} 数组下标
  */
-export const binarySearchArr = (arr, target) => {
+export const binarySearchArr = (arr = [], target) => {
   if (!isArray(arr)) {
+    chalkPrint('[binarySearchArr] argument is not Array.', 'red');
     return -1;
   }
   // arr前提要是从小到大排列的数组

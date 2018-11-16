@@ -157,7 +157,9 @@
    * @return {Array}
    */
 
-  var shuffleArr = function shuffleArr(arr) {
+  var shuffleArr = function shuffleArr() {
+    var arr = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+
     if (!isArray(arr)) {
       chalkPrint('[shuffleArr] argument is not Array.', 'red');
       return [];
@@ -175,14 +177,18 @@
     return _arr;
   };
   /**
-   * 数组二分搜索算法
+   * 数组二分搜索算法，二分搜索适合在大量数据中搜索。如果数组长度小，直接用arr.indexOf()即可
    * @param {Array} arr 要搜索的数组
    * @param {Any} target 目标值
    * @return {Number} 数组下标
    */
 
-  var binarySearchArr = function binarySearchArr(arr, target) {
+  var binarySearchArr = function binarySearchArr() {
+    var arr = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+    var target = arguments.length > 1 ? arguments[1] : undefined;
+
     if (!isArray(arr)) {
+      chalkPrint('[binarySearchArr] argument is not Array.', 'red');
       return -1;
     } // arr前提要是从小到大排列的数组
 
@@ -215,6 +221,42 @@
     uniqueArr: uniqueArr,
     shuffleArr: shuffleArr,
     binarySearchArr: binarySearchArr
+  });
+
+  var formatDate = function formatDate(timestamp, format) {
+    var date = new Date(timestamp);
+    var map = {
+      // 'y': date.getFullYear(),
+      'M': date.getMonth() + 1,
+      'd': date.getDate(),
+      'h': date.getHours(),
+      'm': date.getMinutes(),
+      's': date.getSeconds(),
+      'S': date.getMilliseconds(),
+      'q': Math.floor((date.getMonth() + 3) / 3) // 季度
+
+    };
+    format = format.replace(/([yMdhmsSq])+/g, function (all, t) {
+      var v = map[t];
+
+      if (v !== undefined) {
+        if (all.length > 1) {
+          v = '0' + v;
+          v = v.substr(v.length - 2);
+        }
+
+        return v;
+      } else if (t === 'y') {
+        return (date.getFullYear() + '').substr(4 - all.length);
+      }
+
+      return all;
+    });
+    return format;
+  };
+
+  var _date = /*#__PURE__*/Object.freeze({
+    formatDate: formatDate
   });
 
   /**
@@ -680,7 +722,7 @@
     parseQueryString: parseQueryString
   });
 
-  var wutils = Object.assign({}, _array, _dom, _function, _object, _platform, _print, _random, _regexp, _storage, _string);
+  var wutils = Object.assign({}, _array, _date, _dom, _function, _object, _platform, _print, _random, _regexp, _storage, _string);
 
   return wutils;
 
