@@ -223,7 +223,19 @@
     binarySearchArr: binarySearchArr
   });
 
+  /**
+   *
+   * @param {*} timestamp
+   * @param {*} format
+   * @param {*} isPhpTimeStamp
+   */
   var formatDate = function formatDate(timestamp, format) {
+    var isPhpTimeStamp = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+    if (isPhpTimeStamp) {
+      date = date * 1000;
+    }
+
     var date = new Date(timestamp);
     var map = {
       // 'y': date.getFullYear(),

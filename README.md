@@ -27,6 +27,11 @@ npm run test
 - addClass
 - removeClass
 
+### function
+
+- debounce
+- throttle
+
 ### object
 
 - isEmptyObj
