@@ -1,16 +1,16 @@
-import { isPlainObject, isEmptyObj, extend, stringfyQueryString } from '../src/object/object.js';
+import { isPlainObj, isEmptyObj, extend, stringfyQueryString } from '../src/object/object.js';
 
 let o = new Object()
 let fn = new Function()
 let arr = new Array()
 
-test('isPlainObject', () => {
-  expect( isPlainObject({}) ).toBeTruthy()
-  expect( isPlainObject({name: 'xiaoming'}) ).toBeTruthy()
+test('isPlainObj', () => {
+  expect( isPlainObj({}) ).toBeTruthy()
+  expect( isPlainObj({name: 'xiaoming'}) ).toBeTruthy()
 
-  expect( isPlainObject('hello') ).toBeFalsy()
-  expect( isPlainObject(100) ).toBeFalsy()
-  expect( isPlainObject(fn) ).toBeFalsy()
+  expect( isPlainObj('hello') ).toBeFalsy()
+  expect( isPlainObj(100) ).toBeFalsy()
+  expect( isPlainObj(fn) ).toBeFalsy()
 })
 
 

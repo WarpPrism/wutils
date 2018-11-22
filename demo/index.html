@@ -14,7 +14,9 @@
     let arr = [{cost: 300}, {cost: 1600}, {cost: 99}]
     console.log(wutils.quickSortArr(arr, 'cost'))
 
-    let d = wutils.formatDate(new Date(), 'yyyy-MM-dd hh:mm:sss')
+    let nd = +new Date()
+    console.log(nd);
+    let d = wutils.formatDate(nd,'')
     console.log(d);
   </script>
 </body>

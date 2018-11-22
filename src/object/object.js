@@ -2,7 +2,7 @@
  * 判断是否是纯对象
  * @param {*} value
  */
-export const isPlainObject = (value) => {
+export const isPlainObj = (value) => {
   if (typeof value != 'object' || Object.prototype.toString.call(value) != '[object Object]') {
     return false
   }
@@ -21,7 +21,7 @@ export const isPlainObject = (value) => {
  * @param {*} obj
  */
 export const isEmptyObj = (obj = {}) => {
-  if (!isPlainObject(obj)) {
+  if (!isPlainObj(obj)) {
     return false;
   }
   for (let prop in obj) {
@@ -79,7 +79,7 @@ export const extend = () => {
 				}
 
 				// Recurse if we're merging plain objects or arrays
-				if ( deep && copy && ( isPlainObject( copy ) ||
+				if ( deep && copy && ( isPlainObj( copy ) ||
 					( copyIsArray = Array.isArray( copy ) ) ) ) {
 
 					if ( copyIsArray ) {
@@ -87,7 +87,7 @@ export const extend = () => {
 						clone = src && Array.isArray( src ) ? src : [];
 
 					} else {
-						clone = src && isPlainObject( src ) ? src : {};
+						clone = src && isPlainObj( src ) ? src : {};
 					}
 
 					// Never move original objects, clone them

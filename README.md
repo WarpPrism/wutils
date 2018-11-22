@@ -17,9 +17,15 @@ npm run test
 
 ### array
 
+- isArr
 - quickSortArr
 - uniqueArr
 - shuffleArr
+- binarySearchArr
+
+### date
+
+- formatDate
 
 ### dom
 
@@ -34,6 +40,7 @@ npm run test
 
 ### object
 
+- isPlainObj
 - isEmptyObj
 - extend
 - stringfyQueryString

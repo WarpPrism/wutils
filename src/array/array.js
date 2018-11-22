@@ -4,7 +4,7 @@ import { randomInt } from '../random/random.js'
 /**
  * 数组判断
  */
-export const isArray = (arr = []) => {
+export const isArr = (arr = []) => {
   if (Array.isArray) {
     return Array.isArray(arr)
   } else {
@@ -18,7 +18,7 @@ export const isArray = (arr = []) => {
  * @param {String} key 按对象的属性进行排序
  */
 export const quickSortArr = (arr = [], key = '') => {
-  if (!isArray(arr)) {
+  if (!isArr(arr)) {
     chalkPrint('[quickSortArr] argument is not Array.', 'red');
     return [];
   } else if (arr.length <= 1) {
@@ -52,7 +52,7 @@ export const quickSortArr = (arr = [], key = '') => {
  * @param {*} arr
  */
 export const uniqueArr = (arr = []) => {
-  if (!isArray(arr)) {
+  if (!isArr(arr)) {
     chalkPrint('[uniqueArr] argument is not Array.', 'red');
     return [];
   } else if (arr.length <= 1) {
@@ -84,7 +84,7 @@ export const uniqueArr = (arr = []) => {
  * @return {Array}
  */
 export const shuffleArr = (arr = []) => {
-  if (!isArray(arr)) {
+  if (!isArr(arr)) {
     chalkPrint('[shuffleArr] argument is not Array.', 'red');
     return [];
   }
@@ -105,7 +105,7 @@ export const shuffleArr = (arr = []) => {
  * @return {Number} 数组下标
  */
 export const binarySearchArr = (arr = [], target) => {
-  if (!isArray(arr)) {
+  if (!isArr(arr)) {
     chalkPrint('[binarySearchArr] argument is not Array.', 'red');
     return -1;
   }

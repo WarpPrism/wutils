@@ -4,7 +4,7 @@
  * @param {*} format
  * @param {*} isPhpTimeStamp
  */
-export const formatDate = (timestamp, format, isPhpTimeStamp = false) => {
+export const formatDate = (timestamp, format = 'yyyy.MM.dd hh:mm:ss', isPhpTimeStamp = false) => {
   if (isPhpTimeStamp) {
 		date = date * 1000;
 	}

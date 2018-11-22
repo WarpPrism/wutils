@@ -1,17 +1,17 @@
-import { isArray, quickSortArr, uniqueArr, shuffleArr } from '../src/array/array.js';
+import { isArr, quickSortArr, uniqueArr, shuffleArr } from '../src/array/array.js';
 
-test('isArray', () => {
-  expect(isArray([0, 1])).toBeTruthy()
-  expect(isArray('hello')).toBeFalsy()
-  expect(isArray(100)).toBeFalsy()
+test('isArr', () => {
+  expect(isArr([0, 1])).toBeTruthy()
+  expect(isArr('hello')).toBeFalsy()
+  expect(isArr(100)).toBeFalsy()
 })
 
-test('quicksort ascend', () => {
+test('quicksort arr ascend', () => {
   let testArr = [7, 20, 0, 88, 32, 72, 119]
   expect( quickSortArr(testArr) ).toEqual([0, 7, 20, 32, 72, 88, 119])
 })
 
-test('quicksort by key', () => {
+test('quicksort arr by key', () => {
   let testArr = [{cost: 300}, {cost: 1600}, {cost: 99}]
   expect( quickSortArr(testArr, 'cost') ).toEqual([{cost: 99}, {cost: 300}, {cost: 1600}])
 })
