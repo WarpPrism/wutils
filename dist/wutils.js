@@ -544,7 +544,8 @@
     throttle: throttle
   });
 
-  var _arguments = arguments;
+  var _this = undefined,
+      _arguments = arguments;
 
   /**
    * 判断是否是纯对象
@@ -611,20 +612,21 @@
     } // Handle case when target is a string or something (possible in deep copy)
 
 
-    if (_typeof(target) !== "object" && typeof target !== 'function') {
+    if (_typeof(target) !== "object" && typeof target !== "function") {
       target = {};
     } // Extend jQuery itself if only one argument is passed
-    // No jQuery, let this = {}
 
 
     if (i === length) {
-      target = {};
+      target = _this;
       i--;
     }
 
     for (; i < length; i++) {
       // Only deal with non-null/undefined values
-      if ((options = _arguments[i]) != null) {
+      options = _arguments[i];
+
+      if (options != null) {
         // Extend the base object
         for (name in options) {
           src = target[name];
@@ -635,7 +637,9 @@
           } // Recurse if we're merging plain objects or arrays
 
 
-          if (deep && copy && (isPlainObj(copy) || (copyIsArray = Array.isArray(copy)))) {
+          copyIsArray = Array.isArray(copy);
+
+          if (deep && copy && (isPlainObj(copy) || copyIsArray)) {
             if (copyIsArray) {
               copyIsArray = false;
               clone = src && Array.isArray(src) ? src : [];

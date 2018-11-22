@@ -9,6 +9,8 @@ rollup打包、ES6编码、babel7.0转译、jest测试
 npm run build
 # 测试
 npm run test
+# 只测试某一个模块 e.g.
+npm run test array.test.js
 ~~~
 
 ## 使用方法
@@ -35,14 +37,14 @@ npm run test
 
 ### function
 
-- debounce
-- throttle
+- debounce (同lodash.debounce)
+- throttle (同lodash.throttle)
 
 ### object
 
 - isPlainObj
 - isEmptyObj
-- extend
+- extend (同jQuery.extend)
 - stringfyQueryString
 
 ### platform

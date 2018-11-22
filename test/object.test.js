@@ -24,28 +24,44 @@ test('isEmptyObj', () => {
 })
 
 
-// test('extend', () => {
-//   // we are venome~
-//   var Eddie  = {
-//     name: 'Eddie Brock',
-//     age: '36',
-//     feature: {
-//       talent: 'elevator'
-//     }
-//   }
-//   var Venome = {
-//     name: 'venome',
-//     age: 'unknown',
-//     feature: {
-//       talent: 'jump',
-//       appetite: 'huge'
-//     }
-//   }
-//   Eddie = JSON.parse(JSON.stringify(Eddie))
-//   Venome = JSON.parse(JSON.stringify(Venome))
+test('extend object', () => {
+  // we are venome~
+  let Eddie  = {
+    name: 'Eddie Brock',
+    age: '36',
+    feature: {
+      talent: 'elevator',
+      kind: true,
+      justical: true
+    }
+  }
+  let Venome = {
+    name: 'venome',
+    age: '10^32',
+    feature: {
+      talent: 'jump',
+      appetite: 'huge'
+    }
+  }
+  var duye1 = extend({}, Eddie, Venome)
+  var duye2 = extend(true, {}, Eddie, Venome)
 
-//   var duye1 = extend(Eddie, Venome)
-//   var duye2 = extend(true, {}, Eddie, Venome)
-//   console.log(duye1);
-//   expect(1).toBe(1)
-// })
+  expect(duye1).toEqual({
+    name: 'venome',
+    age: '10^32',
+    feature: {
+      talent: 'jump',
+      appetite: 'huge'
+    }
+  })
+  expect(duye2).toEqual({
+    name: 'venome',
+    age: '10^32',
+    feature: {
+      talent: 'jump',
+      appetite: 'huge',
+      kind: true,
+      justical: true
+    }
+  })
+})

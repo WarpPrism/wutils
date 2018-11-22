@@ -14,10 +14,25 @@
     let arr = [{cost: 300}, {cost: 1600}, {cost: 99}]
     console.log(wutils.quickSortArr(arr, 'cost'))
 
-    let nd = +new Date()
-    console.log(nd);
-    let d = wutils.formatDate(nd,'')
-    console.log(d);
+
+    let Eddie  = {
+      name: 'Eddie Brock',
+      age: '36',
+      feature: {
+        talent: 'elevator'
+      }
+    }
+    let Venome = {
+      name: 'venome',
+      age: 'unknown',
+      feature: {
+        talent: 'jump',
+        appetite: 'huge'
+      }
+    }
+    var duye1 = wutils.extend(true, Eddie, Venome)
+    var duye2 = wutils.extend(true, {}, Eddie, Venome)
+    console.log(Eddie);
   </script>
 </body>
 </html>
