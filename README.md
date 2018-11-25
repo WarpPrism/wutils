@@ -28,6 +28,7 @@ npm run test array.test.js
 ### date
 
 - formatDate
+- getDateObj
 
 ### dom
 
@@ -78,7 +79,10 @@ npm run test array.test.js
 
 ### string
 
+- upcaseMoney
 - replaceXSS
 - parseQueryString
+- b64EncodeUnicode
+- b64DecodeUnicode
 
 > 持续更新中

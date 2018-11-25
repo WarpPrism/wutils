@@ -267,9 +267,32 @@
     });
     return format;
   };
+  /**
+   * @desc 解析时间戳，并返回年月日等信息
+   * @param {*} timestamp
+   */
+
+  var getDateObj = function getDateObj(timestamp) {
+    if (!timestamp || typeof timestamp !== 'number' || typeof timestamp !== 'string') {
+      timestamp = +new Date();
+    }
+
+    var date = new Date(timestamp);
+    return {
+      'year': date.getFullYear(),
+      'month': date.getMonth() + 1,
+      'day': date.getDate(),
+      'hour': date.getHours(),
+      'minute': date.getMinutes(),
+      'second': date.getSeconds(),
+      'millsecond': date.getMilliseconds(),
+      'quarter': Math.floor((date.getMonth() + 3) / 3)
+    };
+  };
 
   var _date = /*#__PURE__*/Object.freeze({
-    formatDate: formatDate
+    formatDate: formatDate,
+    getDateObj: getDateObj
   });
 
   /**
@@ -544,9 +567,6 @@
     throttle: throttle
   });
 
-  var _this = undefined,
-      _arguments = arguments;
-
   /**
    * 判断是否是纯对象
    * @param {*} value
@@ -589,7 +609,7 @@
   /**
    * @desc jQuery extend method
    * @desc jQuery.extend( [deep ], target, object1 [, objectN ] )
-   * @desc 该方法会修改target对象本身
+   * @desc 可用于浅拷贝或深拷贝。注意：该方法会修改target对象本身
    */
 
   var extend = function extend() {
@@ -599,15 +619,15 @@
         copy,
         copyIsArray,
         clone,
-        target = _arguments[0] || {},
+        target = arguments[0] || {},
         i = 1,
-        length = _arguments.length,
+        length = arguments.length,
         deep = false; // Handle a deep copy situation
 
     if (typeof target === "boolean") {
       deep = target; // Skip the boolean and the target
 
-      target = _arguments[i] || {};
+      target = arguments[i] || {};
       i++;
     } // Handle case when target is a string or something (possible in deep copy)
 
@@ -618,13 +638,13 @@
 
 
     if (i === length) {
-      target = _this;
+      target = this;
       i--;
     }
 
     for (; i < length; i++) {
       // Only deal with non-null/undefined values
-      options = _arguments[i];
+      options = arguments[i];
 
       if (options != null) {
         // Extend the base object
@@ -888,9 +908,45 @@
   });
 
   /**
+   *
+   * @desc   现金额转大写
+   * @param  {Number, String} n
+   * @return {String}
+   */
+  var upcaseMoney = function upcaseMoney(n) {
+    // n = parseFloat(n)
+    var fraction = ['角', '分'];
+    var digit = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖'];
+    var unit = [['元', '万', '亿'], ['', '拾', '佰', '仟']];
+    var head = n < 0 ? '欠' : '';
+    n = Math.abs(n);
+    var s = '';
+
+    for (var i = 0; i < fraction.length; i++) {
+      s += (digit[Math.floor(n * 10 * Math.pow(10, i)) % 10] + fraction[i]).replace(/零./, '');
+    }
+
+    s = s || '整';
+    n = Math.floor(n);
+
+    for (var i = 0; i < unit[0].length && n > 0; i++) {
+      var p = '';
+
+      for (var j = 0; j < unit[1].length && n > 0; j++) {
+        p = digit[n % 10] + unit[1][j] + p;
+        n = Math.floor(n / 10);
+      }
+
+      s = p.replace(/(零.)*零$/, '').replace(/^$/, '零') + unit[0][i] + s;
+    }
+
+    return head + s.replace(/(零.)*零元/, '元').replace(/(零.)+/g, '零').replace(/^整$/, '零元整');
+  };
+  /**
     * @desc XSS字符转义
     * @param {String} markupStr [要转义的字符串]
    */
+
   var replaceXSS = function replaceXSS(markupStr) {
     var _ENCODE_HTML_RULES = {
       "&": "&amp;",
@@ -904,6 +960,7 @@
     function encode_char(c) {
       return _ENCODE_HTML_RULES[c] || c;
     }
+
     return markupStr === undefined ? '' : String(markupStr).replace(_MATCH_HTML, encode_char);
   };
   /**
@@ -923,10 +980,33 @@
 
     return JSON.parse('{"' + decodeURIComponent(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}');
   };
+  /**
+   * @desc unicode字符串base64编码
+   * @param {String} str
+   */
+
+  var b64EncodeUnicode = function b64EncodeUnicode(str) {
+    return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function (match, p1) {
+      return String.fromCharCode('0x' + p1);
+    }));
+  };
+  /**
+   * @desc unicode字符串base64解码
+   * @param {String} str
+   */
+
+  var b64DecodeUnicode = function b64DecodeUnicode(str) {
+    return decodeURIComponent(atob(str).split('').map(function (c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+  };
 
   var _string = /*#__PURE__*/Object.freeze({
+    upcaseMoney: upcaseMoney,
     replaceXSS: replaceXSS,
-    parseQueryString: parseQueryString
+    parseQueryString: parseQueryString,
+    b64EncodeUnicode: b64EncodeUnicode,
+    b64DecodeUnicode: b64DecodeUnicode
   });
 
   var wutils = Object.assign({}, _array, _date, _dom, _function, _object, _platform, _print, _random, _regexp, _storage, _string);

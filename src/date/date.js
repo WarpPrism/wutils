@@ -34,3 +34,24 @@ export const formatDate = (timestamp, format = 'yyyy.MM.dd hh:mm:ss', isPhpTimeS
   })
   return format;
 }
+
+/**
+ * @desc 解析时间戳，并返回年月日等信息
+ * @param {*} timestamp
+ */
+export const getDateObj = (timestamp) => {
+  if (!timestamp || typeof timestamp !== 'number' || typeof timestamp !== 'string') {
+    timestamp = +new Date()
+  }
+  let date = new Date(timestamp)
+  return {
+    'year': date.getFullYear(),
+    'month': date.getMonth() + 1,
+    'day': date.getDate(),
+    'hour': date.getHours(),
+    'minute': date.getMinutes(),
+    'second': date.getSeconds(),
+    'millsecond': date.getMilliseconds(),
+    'quarter': Math.floor((date.getMonth() + 3) / 3)
+  }
+}
