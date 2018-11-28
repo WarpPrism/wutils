@@ -40,10 +40,11 @@ export const formatDate = (timestamp, format = 'yyyy.MM.dd hh:mm:ss', isPhpTimeS
  * @param {*} timestamp
  */
 export const getDateObj = (timestamp) => {
-  if (!timestamp || typeof timestamp !== 'number' || typeof timestamp !== 'string') {
+  if (!timestamp || (typeof timestamp !== 'number' && typeof timestamp !== 'string')) {
     timestamp = +new Date()
   }
   let date = new Date(timestamp)
+  // 缺 星期几
   return {
     'year': date.getFullYear(),
     'month': date.getMonth() + 1,

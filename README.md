@@ -1,6 +1,6 @@
 # wutils 通用前端工具库
 
-主要封装业务中常用的函数，特别是lodash未实现的一些业务函数，但一定程度上和lodash有交集。如果lodash已实现同样功能的函数，建议采用lodash。
+主要封装业务中 **常用** 的函数，特别是lodash未实现的一些业务函数，但一定程度上和lodash有交集。如果lodash已实现同样功能的函数，建议采用lodash。
 
 ## 技术选型
 rollup打包、ES6编码、babel7.0转译、jest测试
@@ -38,14 +38,14 @@ npm run test array.test.js
 
 ### function
 
-- debounce (同lodash.debounce)
-- throttle (同lodash.throttle)
+- debounce (同 lodash.debounce)
+- throttle (同 lodash.throttle)
 
 ### object
 
 - isPlainObj
 - isEmptyObj
-- extend (同jQuery.extend)
+- extend (同 jQuery.extend)
 - stringfyQueryString
 
 ### platform
