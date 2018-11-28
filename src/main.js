@@ -13,3 +13,15 @@ import * as _string from './string/string.js'
 const wutils = Object.assign({}, _array, _date, _dom, _function, _object, _platform, _print, _random, _regexp, _storage, _string)
 
 export default wutils
+
+export * from './array/array.js'
+export * from './date/date.js'
+export * from './dom/dom.js'
+export * from './function/function.js'
+export * from './object/object.js'
+export * from './platform/platform.js'
+export * from './print/print.js'
+export * from './random/random.js'
+export * from './regexp/regexp.js'
+export * from './storage/storage.js'
+export * from './string/string.js'

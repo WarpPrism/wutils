@@ -4,7 +4,6 @@
  * @param {*} colorStyle
  */
 export const chalkPrint = (str, colorStyle = 'green') => {
-  if (str && typeof str === 'string') {
-    console.log('%c' + str, `font-weight: bold; color: ${colorStyle}`);
-  }
+  str = toString(str) || ''
+  console.log('%c' + str, `font-weight: bold; color: ${colorStyle}`);
 }

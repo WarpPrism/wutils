@@ -14,6 +14,24 @@ npm run test array.test.js
 ~~~
 
 ## 使用方法
+wutils模块的默认构建方式是 **es**，即ES6模块。如果想要生成commonjs或amd模块，请修改 ```rollup.config.js``` 文件里的 ```OUTPUT_MODULE_TYPE``` 属性即可。
+
+ES6模块使用举例
+
+~~~javascrpt
+// 整个模块引入
+import wutils from 'wutils.js'
+
+wutils.getBrowser()
+~~~
+
+~~~javascrpt
+// 按需引入
+import { getBrowser, getOS } from 'wutils.js'
+
+getBrowser()
+getOS()
+~~~
 
 ## 模块分类说明
 

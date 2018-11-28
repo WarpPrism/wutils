@@ -1,4 +1,10 @@
 const path = require('path')
+const env = process.env.NODE_ENV || 'test'
+const chalk = require('chalk')
+
+if (env) {
+  console.log( chalk.white.bgCyan.bold('[process env]:', env.toUpperCase()) )
+}
 
 module.exports = {
   verbose: false,

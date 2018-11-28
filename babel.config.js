@@ -1,9 +1,4 @@
 const env = process.env.NODE_ENV || 'production'
-const chalk = require('chalk')
-
-if (env) {
-  console.log( chalk.cyan('[babel config] process env:', env.toUpperCase()) )
-}
 
 module.exports = {
   presets: ["@babel/preset-env"],
