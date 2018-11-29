@@ -1,6 +1,6 @@
 # wutils 通用前端工具库
 
-主要封装业务中 **常用** 的函数，特别是lodash未实现的一些业务函数，但一定程度上和lodash有交集。如果lodash已实现同样功能的函数，建议采用lodash。
+主要封装 **业务中常用** 的函数，特别是lodash未实现的一些业务函数，但一定程度上和lodash有交集。如果lodash已实现同样功能的函数，建议采用lodash。
 
 ## 技术选型
 rollup打包、ES6编码、babel7.0转译、jest测试
@@ -18,14 +18,14 @@ wutils模块的默认构建方式是 **es**，即ES6模块。如果想要生成c
 
 ES6模块使用举例
 
-~~~javascrpt
+~~~js
 // 整个模块引入
 import wutils from 'wutils.js'
 
 wutils.getBrowser()
 ~~~
 
-~~~javascrpt
+~~~js
 // 按需引入
 import { getBrowser, getOS } from 'wutils.js'
 
