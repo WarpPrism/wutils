@@ -13,11 +13,11 @@ export const createSingleton = function(fn) {
 }
 
 // 适配器模式：主要用于解决两个接口之间不匹配的问题。
-常用于把一个接口的数据格式转为另一种
-let adaptor = function(fn1_form) {
-  let fn2_form = handle(fn1_form)
-  return fn2_form
-}
+// 常用于把一个接口的数据格式转为另一种
+// let adaptor = function(fn1_form) {
+//   let fn2_form = handle(fn1_form)
+//   return fn2_form
+// }
 
 // 装饰器模式：动态地给函数赋能。
 // AOP 装饰函数
@@ -46,7 +46,7 @@ Chain.prototype.setNextChain = function(chain) {
 Chain.prototype.exec = function() {
   const result = this.fn.apply(this, arguments)
   if (result === CHAIN_FINISH) {
-    this.nextChain.exec.apply(this.sucessor, arguments)
+    this.nextChain.exec.apply(this.nextChain, arguments)
   }
 }
 
