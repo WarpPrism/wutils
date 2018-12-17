@@ -1,3 +1,5 @@
+import { chalkPrint } from '../print/print.js'
+import { isArr } from '../array/array.js'
 // 设计模式，设计模式是解决某个特定场景下对某种问题的解决方案。
 
 // 单例模式：一个类只能构造出唯一实例
@@ -56,38 +58,39 @@ Chain.prototype.exec = function() {
  * @return {Object} observer [观察者对象]
 */
 export const createObserver = function() {
-  let observer = {};
+  let observer = {}
   observer = {
     handlers: {},
     listen: function(event, handler) {
       if (!this.handlers[event]) {
-        this.handlers[event] = [];
+        this.handlers[event] = []
       }
-      this.handlers[event].push(handler);
+      this.handlers[event].push(handler)
     },
-    trigger: function(event, data=null) {
+    trigger: function(event = '', data = null) {
       if (!event || !this.handlers[event]) {
-        console.warn('[Observer Module] No such event to be trigered: ' + event);
+        chalkPrint('[createObserver] No such event to be trigered: ' + event, 'red')
       } else {
+        // 依次触发 handlers 数组里的函数
         for (let i = 0; i < this.handlers[event].length; i++) {
-          let foo = this.handlers[event][i];
-          foo(data);
+          let foo = this.handlers[event][i]
+          foo(data)
         }
       }
     },
-    remove: function(event, handler) {
-      let handlers = this.handlers[event];
-      if (Array.isArray(handlers)) {
+    remove: function(event = '', handler) {
+      let handlers = this.handlers[event]
+      if (isArr(handlers)) {
         handlers.forEach(function(item, index) {
           if (item == handler) {
-            handlers.splice(index, 1);
-            return;
+            handlers.splice(index, 1)
+            return
           }
-        });
+        })
       } else {
-        console.warn('[Observer Module] No such event to be removed: ' + event);
+        chalkPrint('[createObserver] No such event to be removed: ' + event, 'red')
       }
     }
   }
-  return observer;
+  return observer
 }
