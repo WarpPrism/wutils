@@ -1,4 +1,15 @@
 /**
+ * 设置元素类名
+ */
+export function setClass(ele, cls) {
+	if (ele.hasOwnProperty('className')) {
+		ele.className = cls;
+	} else {
+		ele.setAttribute('class', cls);
+	}
+}
+
+/**
  *
  * @desc 判断元素是否有某个class
  * @param {HTMLElement} ele

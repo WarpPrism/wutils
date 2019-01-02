@@ -35,7 +35,7 @@ export const getBrowser = () => {
   if (sys.chrome) return ('Chrome: ' + sys.chrome)
   if (sys.opera) return ('Opera: ' + sys.opera)
   if (sys.safari) return ('Safari: ' + sys.safari)
-  return 'Unkonwn'
+  return 'unknown'
 }
 
 /**

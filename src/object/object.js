@@ -1,3 +1,5 @@
+import { isArr } from '../array/array.js'
+
 /**
  * 判断是否是纯对象
  * @param {*} value
@@ -79,12 +81,12 @@ export const extend = function() {
 				}
 
 				// Recurse if we're merging plain objects or arrays
-				copyIsArray = Array.isArray(copy)
+				copyIsArray = isArr(copy)
 				if (deep && copy && (isPlainObj(copy) || copyIsArray)) {
 
 					if (copyIsArray) {
 						copyIsArray = false;
-						clone = src && Array.isArray(src) ? src : [];
+						clone = src && isArr(src) ? src : [];
 
 					} else {
 						clone = src && isPlainObj(src) ? src : {};
