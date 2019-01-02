@@ -289,12 +289,23 @@ var _date = /*#__PURE__*/Object.freeze({
 });
 
 /**
+ * 设置元素类名
+ */
+function setClass(ele, cls) {
+  if (ele.hasOwnProperty('className')) {
+    ele.className = cls;
+  } else {
+    ele.setAttribute('class', cls);
+  }
+}
+/**
  *
  * @desc 判断元素是否有某个class
  * @param {HTMLElement} ele
  * @param {String} cls
  * @return {Boolean}
  */
+
 function hasClass(ele, cls) {
   return new RegExp('(\\s|^)' + cls + '(\\s|$)').test(ele.className);
 }
@@ -344,6 +355,7 @@ function removeClass(el, cls) {
 }
 
 var _dom = /*#__PURE__*/Object.freeze({
+  setClass: setClass,
   hasClass: hasClass,
   addClass: addClass,
   removeClass: removeClass
@@ -564,6 +576,7 @@ var _function = /*#__PURE__*/Object.freeze({
  * 判断是否是纯对象
  * @param {*} value
  */
+
 var isPlainObj = function isPlainObj(value) {
   if (_typeof(value) != 'object' || Object.prototype.toString.call(value) != '[object Object]') {
     return false;
@@ -650,12 +663,12 @@ var extend = function extend() {
         } // Recurse if we're merging plain objects or arrays
 
 
-        copyIsArray = Array.isArray(copy);
+        copyIsArray = isArr(copy);
 
         if (deep && copy && (isPlainObj(copy) || copyIsArray)) {
           if (copyIsArray) {
             copyIsArray = false;
-            clone = src && Array.isArray(src) ? src : [];
+            clone = src && isArr(src) ? src : [];
           } else {
             clone = src && isPlainObj(src) ? src : {};
           } // Never move original objects, clone them
@@ -737,7 +750,7 @@ var getBrowser = function getBrowser() {
   if (sys.chrome) return 'Chrome: ' + sys.chrome;
   if (sys.opera) return 'Opera: ' + sys.opera;
   if (sys.safari) return 'Safari: ' + sys.safari;
-  return 'Unkonwn';
+  return 'unknown';
 };
 /**
  * 判断是否是微信环境
@@ -1009,4 +1022,4 @@ var _string = /*#__PURE__*/Object.freeze({
 var wutils = Object.assign({}, _array, _date, _dom, _function, _object, _platform, _print, _random, _regexp, _storage, _string);
 
 export default wutils;
-export { isArr, quickSortArr, uniqueArr, shuffleArr, binarySearchArr, formatDate, getDateObj, hasClass, addClass, removeClass, debounce, throttle, isPlainObj, isEmptyObj, extend, stringfyQueryString, getOS, getBrowser, isWeixin, chalkPrint, randomColor, randomInt, randomString, isEmail, isIdCard, isPhoneNum, isUrl, setCookie, getCookie, removeCookie, upcaseMoney, replaceXSS, parseQueryString, b64EncodeUnicode, b64DecodeUnicode };
+export { isArr, quickSortArr, uniqueArr, shuffleArr, binarySearchArr, formatDate, getDateObj, setClass, hasClass, addClass, removeClass, debounce, throttle, isPlainObj, isEmptyObj, extend, stringfyQueryString, getOS, getBrowser, isWeixin, chalkPrint, randomColor, randomInt, randomString, isEmail, isIdCard, isPhoneNum, isUrl, setCookie, getCookie, removeCookie, upcaseMoney, replaceXSS, parseQueryString, b64EncodeUnicode, b64DecodeUnicode };

@@ -50,6 +50,7 @@ getOS()
 
 ### dom
 
+- setClass
 - hasClass
 - addClass
 - removeClass
