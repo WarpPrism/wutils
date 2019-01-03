@@ -1,5 +1,5 @@
 {
-  "name": "wutils",
+  "name": "@wps/wutils",
   "version": "0.1.0",
   "description": "前端通用工具库，wutils即wps-utils，weapon-utils，实现前端常用函数的封装。注释、单元测试、文档齐全。",
   "main": "main.js",
@@ -10,8 +10,16 @@
     "test": "cross-env NODE_ENV=test npm run test:unit",
     "test:unit": "jest --config test/jest.conf.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WarpPrism/wutils.git"
+  },
   "author": "zhoujihao@wps.cn",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/WarpPrism/wutils/issues"
+  },
+  "homepage": "https://github.com/WarpPrism/wutils#readme",
   "devDependencies": {
     "@babel/core": "^7.1.5",
     "@babel/preset-env": "^7.1.5",
