@@ -215,6 +215,64 @@ var _array = /*#__PURE__*/Object.freeze({
   binarySearchArr: binarySearchArr
 });
 
+// 黑科技、奇技淫巧
+
+/**
+ * 给所有dom元素增加彩色边框
+ */
+var $outlineAnything = function $outlineAnything() {
+  if (window && window.document) {
+    [].forEach.call($$("*"), function (a) {
+      a.style.outline = "1px solid #" + (~~(Math.random() * (1 << 24))).toString(16);
+    });
+  }
+};
+/**
+ * 单行写一个评级组件
+ * @param {*} rate 评几分 0-10
+ */
+
+var $getRate = function $getRate(rate) {
+  return '★★★★★☆☆☆☆☆'.slice(5 - rate, 10 - rate);
+};
+/**
+ * 生成动态不重复的一个32位的唯一标识
+ */
+
+var $uuid = function $uuid() {
+  return 'xxxxxxxx-xxxx-xxxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    var r = Math.random() * 16 | 0;
+    var v = c == 'x' ? r : r & 0x3 | 0x8;
+    return v.toString(16);
+  }).toUpperCase();
+};
+/**
+ * 判断质数
+ * @param {Number} n 数字
+ */
+
+var $isPrime = function $isPrime(n) {
+  return !/^.?$|^(..+?)\1+$/.test('1'.repeat(n));
+};
+/**
+ * 睡眠 e.g. await sleep(1000);
+ * @param {Number} time 毫秒
+ */
+
+var $sleep = function $sleep(time) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, time);
+  });
+};
+
+var _cooltech = /*#__PURE__*/Object.freeze({
+  $outlineAnything: $outlineAnything,
+  $getRate: $getRate,
+  $uuid: $uuid,
+  $isPrime: $isPrime,
+  $sleep: $sleep
+});
+
 /**
  *
  * @param {*} timestamp
@@ -566,10 +624,58 @@ function throttle(func, wait, options) {
     'trailing': trailing
   });
 }
+/**
+ * 轮询，按一定的时间间隔轮询获取一个函数的执行状态
+ * @param {*} func 要轮询的函数
+ * @param {*} timeout 超时时间
+ * @param {*} interval 轮询周期
+ */
+
+function poll(func) {
+  var timeout = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2000;
+  var interval = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 100;
+  return new Promise(function (resolve, reject) {
+    if (typeof func != 'function') {
+      reject(new Error(func + ' is not a function'));
+    }
+
+    var endTime = +new Date() + timeout(function p() {
+      if (func()) {
+        resolve(func());
+      } else if (+new Date() < endTime) {
+        return setTimeout(p, interval);
+      } else {
+        reject(new Error('timed out for ' + fn + ': ' + arguments));
+      }
+    })();
+  });
+}
+/**
+ * 函数只能执行一次
+ * @param {*} func
+ * @param {*} context
+ */
+
+function once() {
+  var func = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : undefined;
+  var context = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
+  var result = undefined;
+  var fn = func;
+  return function () {
+    if (fn) {
+      result = fn.apply(context || this, arguments);
+      fn = undefined;
+    }
+
+    return result;
+  };
+}
 
 var _function = /*#__PURE__*/Object.freeze({
   debounce: debounce,
-  throttle: throttle
+  throttle: throttle,
+  poll: poll,
+  once: once
 });
 
 /**
@@ -914,11 +1020,27 @@ var _storage = /*#__PURE__*/Object.freeze({
 });
 
 /**
+ * 截取字符串，剩余部分用...替换
+ * @param {*} str 要截取的字符串
+ * @param {*} cutlen 要截取的长度
+ */
+var cutString = function cutString(str, cutlen) {
+  var len = str.length;
+  var result = str.substr(0, cutlen);
+
+  if (cutlen < len) {
+    return result + '...';
+  } else {
+    return result;
+  }
+};
+/**
  *
  * @desc   现金额转大写
  * @param  {Number, String} n
  * @return {String}
  */
+
 var upcaseMoney = function upcaseMoney(n) {
   n = parseFloat(n);
   var fraction = ['角', '分'];
@@ -1012,6 +1134,7 @@ var b64DecodeUnicode = function b64DecodeUnicode(str) {
 };
 
 var _string = /*#__PURE__*/Object.freeze({
+  cutString: cutString,
   upcaseMoney: upcaseMoney,
   replaceXSS: replaceXSS,
   parseQueryString: parseQueryString,
@@ -1019,7 +1142,7 @@ var _string = /*#__PURE__*/Object.freeze({
   b64DecodeUnicode: b64DecodeUnicode
 });
 
-var wutils = Object.assign({}, _array, _date, _dom, _function, _object, _platform, _print, _random, _regexp, _storage, _string);
+var wutils = Object.assign({}, _array, _cooltech, _date, _dom, _function, _object, _platform, _print, _random, _regexp, _storage, _string);
 
 export default wutils;
-export { isArr, quickSortArr, uniqueArr, shuffleArr, binarySearchArr, formatDate, getDateObj, setClass, hasClass, addClass, removeClass, debounce, throttle, isPlainObj, isEmptyObj, extend, stringfyQueryString, getOS, getBrowser, isWeixin, chalkPrint, randomColor, randomInt, randomString, isEmail, isIdCard, isPhoneNum, isUrl, setCookie, getCookie, removeCookie, upcaseMoney, replaceXSS, parseQueryString, b64EncodeUnicode, b64DecodeUnicode };
+export { isArr, quickSortArr, uniqueArr, shuffleArr, binarySearchArr, $outlineAnything, $getRate, $uuid, $isPrime, $sleep, formatDate, getDateObj, setClass, hasClass, addClass, removeClass, debounce, throttle, poll, once, isPlainObj, isEmptyObj, extend, stringfyQueryString, getOS, getBrowser, isWeixin, chalkPrint, randomColor, randomInt, randomString, isEmail, isIdCard, isPhoneNum, isUrl, setCookie, getCookie, removeCookie, cutString, upcaseMoney, replaceXSS, parseQueryString, b64EncodeUnicode, b64DecodeUnicode };
