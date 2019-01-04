@@ -186,3 +186,46 @@ export function throttle(func, wait, options) {
     'trailing': trailing
   })
 }
+
+/**
+ * 轮询，按一定的时间间隔轮询获取一个函数的执行状态
+ * @param {*} func 要轮询的函数
+ * @param {*} timeout 超时时间
+ * @param {*} interval 轮询周期
+ */
+export function poll(func, timeout = 2000, interval = 100) {
+  return new Promise((resolve, reject) => {
+    if (typeof func != 'function') {
+      reject(new Error(func + ' is not a function'));
+    }
+
+    let endTime = +(new Date()) + timeout
+
+    (function p() {
+      if (func()) {
+        resolve(func())
+      } else if (+new Date() < endTime) {
+        return setTimeout(p, interval)
+      } else {
+        reject(new Error('timed out for ' + fn + ': ' + arguments))
+      }
+    })();
+  })
+}
+
+/**
+ * 函数只能执行一次
+ * @param {*} func
+ * @param {*} context
+ */
+export function once(func = undefined, context = undefined)  {
+  let result = undefined;
+  let fn = func;
+  return function() {
+    if (fn) {
+      result = fn.apply(context || this, arguments);
+      fn = undefined;
+    }
+    return result;
+  }
+}

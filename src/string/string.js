@@ -1,4 +1,19 @@
 /**
+ * 截取字符串，剩余部分用...替换
+ * @param {*} str 要截取的字符串
+ * @param {*} cutlen 要截取的长度
+ */
+export const cutString = (str, cutlen) => {
+  let len = str.length;
+  let result = str.substr(0, cutlen);
+  if (cutlen < len) {
+    return result + '...';
+  } else {
+    return result;
+  }
+}
+
+/**
  *
  * @desc   现金额转大写
  * @param  {Number, String} n

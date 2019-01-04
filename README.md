@@ -59,6 +59,8 @@ getOS()
 
 - debounce (同 lodash.debounce)
 - throttle (同 lodash.throttle)
+- poll
+- once
 
 ### object
 
@@ -98,6 +100,7 @@ getOS()
 
 ### string
 
+- cutString
 - upcaseMoney
 - replaceXSS
 - parseQueryString

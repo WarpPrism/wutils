@@ -1,4 +1,12 @@
-import { upcaseMoney, replaceXSS, parseQueryString, b64EncodeUnicode, b64DecodeUnicode }  from '../src/string/string.js'
+import { cutString, upcaseMoney, replaceXSS, parseQueryString, b64EncodeUnicode, b64DecodeUnicode }  from '../src/string/string.js'
+
+test('cutString', () => {
+  let s = 'this is an alien ship from the deep part of galaxy, and its shape explains to us that she is'
+  expect(cutString(s, -2)).toBe('...')
+  expect(cutString(s, 0)).toBe('...')
+  expect(cutString(s, 7)).toBe('this is...')
+  expect(cutString(s, 100)).toBe(s)
+})
 
 test('upcaseMoney', () => {
   expect(upcaseMoney(0)).toBe('零元整')
